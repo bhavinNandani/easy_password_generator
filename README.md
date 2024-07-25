@@ -1,5 +1,3 @@
-Here's an updated version of your `README.md` file based on the provided code:
-
 # PasswordGenerator
 
 `PasswordGenerator` is a Ruby gem that allows you to generate secure passwords with customizable settings. It supports generating passwords with a mix of upper case letters, lower case letters, numbers, symbols, and known keywords.
@@ -80,7 +78,7 @@ This will create a git tag for the version, push git commits and the created tag
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/password_generator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/password_generator/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/bhavinNandani/password_generator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/password_generator/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
