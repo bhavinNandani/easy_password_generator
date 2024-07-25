@@ -1,30 +1,82 @@
+Here's an updated version of your `README.md` file based on the provided code:
+
 # PasswordGenerator
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/password_generator`. To experiment with that code, run `bin/console` for an interactive prompt.
+`PasswordGenerator` is a Ruby gem that allows you to generate secure passwords with customizable settings. It supports generating passwords with a mix of upper case letters, lower case letters, numbers, symbols, and known keywords.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+To install the gem and add it to the application's Gemfile, execute:
 
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```sh
+$ bundle add password_generator
+```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```sh
+$ gem install password_generator
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+To generate a password, use the `PasswordGenerator::Generator.generate` method. The method supports the following parameters:
+
+- `length` (default: 12): The length of the password to be generated.
+- `upper_case` (default: true): Include upper case letters.
+- `lower_case` (default: true): Include lower case letters.
+- `numbers` (default: true): Include numbers.
+- `symbols` (default: false): Include symbols.
+- `known_keywords` (default: nil): A comma-separated string of known keywords to include in the password.
+- `mix` (default: true): Mix known keywords with random characters.
+
+### Examples
+
+Generate a default password:
+
+```ruby
+password = PasswordGenerator::Generator.generate
+puts password
+```
+
+Generate a password with specific settings:
+
+```ruby
+password = PasswordGenerator::Generator.generate(16, upper_case: false, symbols: true)
+puts password
+```
+
+Generate a password using known keywords only:
+
+```ruby
+password = PasswordGenerator::Generator.generate(12, known_keywords: "dog,cat,fish", mix: false)
+puts password
+```
+
+Generate a password using a mix of known keywords and random characters:
+
+```ruby
+password = PasswordGenerator::Generator.generate(12, known_keywords: "dog,cat,fish", mix: true)
+puts password
+```
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run:
+
+```sh
+$ bundle exec rake install
+```
+
+To release a new version, update the version number in `version.rb`, and then run:
+
+```sh
+$ bundle exec rake release
+```
+
+This will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
@@ -36,4 +88,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the PasswordGenerator project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/password_generator/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the PasswordGenerator project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/password_generator/blob/main/CODE_OF_CONDUCT.md).
