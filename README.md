@@ -1,5 +1,3 @@
-Here's an updated version of your `README.md` file based on the provided code:
-
 # PasswordGenerator
 
 `PasswordGenerator` is a Ruby gem that allows you to generate secure passwords with customizable settings. It supports generating passwords with a mix of upper case letters, lower case letters, numbers, symbols, and known keywords.
