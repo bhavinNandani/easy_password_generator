@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# lib/password_generator/charsets.rb
-module PasswordGenerator
+# lib/easy_password_generator/charsets.rb
+module EasyPasswordGenerator
   module Charsets
     UPPER_CASE = ("A".."Z").to_a.freeze
     LOWER_CASE = ("a".."z").to_a.freeze

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require "password_generator/version"
-require "password_generator/charsets"
+require "easy_password_generator/version"
+require "easy_password_generator/charsets"
 require "securerandom"
 require "byebug"
 
-module PasswordGenerator
+module EasyPasswordGenerator
   # class for passowrd generator
   class Generator
     def self.generate(length = 12, upper_case: true, lower_case: true, numbers: true, symbols: false, known_keywords: "", mix: true)

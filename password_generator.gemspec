@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/password_generator/version"
+require_relative "lib/easy_password_generator/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "password_generator"
-  spec.version = PasswordGenerator::VERSION
+  spec.name = "easy_password_generator"
+  spec.version = EasyPasswordGenerator::VERSION
   spec.authors = ["Bhavin Nandani"]
   spec.email = ["nandanibhavin@gmail.com"]
 
