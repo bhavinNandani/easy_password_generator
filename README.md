@@ -13,8 +13,9 @@ PassForge is a feature-rich password generation toolkit that goes beyond simple 
 - 📝 **Memorable Passphrases** - XKCD-style word-based passwords
 - 🛡️ **Strength Analysis** - Entropy calculation and crack time estimation
 - 🔍 **Breach Checking** - HaveIBeenPwned API integration
-- 🗣️ **Pronounceable Passwords** - Easier to type and remember *(coming soon)*
-- 🎨 **Pattern-Based Generation** - Custom password patterns *(coming soon)*
+- 🗣️ **Pronounceable Passwords** - Easier to type and remember
+- 🎨 **Pattern-Based Generation** - Custom password patterns
+- 📦 **Batch Generation** - Generate multiple passwords at once
 
 ## 📦 Installation
 
@@ -187,13 +188,92 @@ result[:count]     # => 0
 - Your actual password never leaves your system
 - Powered by HaveIBeenPwned API
 
+### Pronounceable Passwords
+
+Generate passwords that are easier to type and remember:
+
+```ruby
+# Basic pronounceable password
+PassForge.pronounceable
+# => "Fabiroxotu86"
+
+# Custom length
+PassForge.pronounceable(length: 16)
+# => "Tuvaxo8qibale9f#"
+
+# Without capitalization
+PassForge.pronounceable(capitalize: false)
+# => "fabiroxotu86"
+
+# Without numbers
+PassForge.pronounceable(numbers: false)
+# => "Fabiroxotu"
+
+# With symbols
+PassForge.pronounceable(symbols: true)
+# => "Fabiroxotu86#"
+```
+
+### Pattern-Based Generation
+
+Create passwords from custom patterns:
+
+```ruby
+# Basic pattern
+PassForge.pattern("Cvccvc99!")
+# => "Piceej98{"
+
+# Pattern characters:
+# C = uppercase letter
+# c = lowercase letter  
+# v = lowercase vowel
+# V = uppercase vowel
+# 9 = digit
+# ! = symbol
+# Any other = literal
+
+# Complex pattern
+PassForge.pattern("CC-vv-99-!!")
+# => "XY-ae-42-@#"
+
+# With literal characters
+PassForge.pattern("Pass-Cvcc-9999")
+# => "Pass-Rabi-5678"
+```
+
+### Batch Generation
+
+Generate multiple passwords at once:
+
+```ruby
+# Generate 10 random passwords
+passwords = PassForge.batch(10, :random, length: 16)
+# => ["aB3dE7gH9jK2mN5p", "xY9zA2bC4dE6fG8h", ...]
+
+# Generate 5 passphrases
+passwords = PassForge.batch(5, :passphrase, words: 4)
+# => ["Correct-Horse-Battery-Staple", ...]
+
+# Generate pronounceable passwords
+passwords = PassForge.batch(10, :pronounceable, length: 12)
+
+# Generate from pattern
+passwords = PassForge.batch(10, :pattern, pattern: "Cvccvc99!")
+
+# Export to CSV
+csv = PassForge::Batch.to_csv(passwords)
+
+# Export to JSON
+json = PassForge::Batch.to_json(passwords)
+```
+
 ## 🔮 Coming Soon
 
 PassForge v1.1+ will include:
 
-- **Pronounceable Passwords**: `PassForge.pronounceable(length: 12)` → easier to type
-- **Pattern-Based**: `PassForge.pattern("Cvccvc99!")` → custom patterns
-- **Batch Generation**: Generate multiple passwords at once
+- **CLI Tool**: Command-line interface for quick password generation
+- **Browser Extension**: Chrome/Firefox extension
+- **Password History**: Save generated passwords locally (encrypted)
 
 ## 🛠️ Development
 

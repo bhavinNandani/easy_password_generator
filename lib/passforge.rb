@@ -7,6 +7,9 @@ require "passforge/generator"
 require "passforge/passphrase"
 require "passforge/analyzer"
 require "passforge/breach_checker"
+require "passforge/pronounceable"
+require "passforge/pattern"
+require "passforge/batch"
 require "securerandom"
 
 # PassForge - A comprehensive password generation toolkit
@@ -47,5 +50,28 @@ module PassForge
   # @return [Hash] Breach information
   def self.breached?(password)
     BreachChecker.check(password)
+  end
+
+  # Generate a pronounceable password
+  # @param options [Hash] Generation options
+  # @return [String] Generated password
+  def self.pronounceable(**options)
+    Pronounceable.generate(**options)
+  end
+
+  # Generate password from pattern
+  # @param pattern [String] Pattern string
+  # @return [String] Generated password
+  def self.pattern(pattern)
+    Pattern.generate(pattern)
+  end
+
+  # Generate multiple passwords
+  # @param count [Integer] Number of passwords
+  # @param type [Symbol] Type of password
+  # @param options [Hash] Generation options
+  # @return [Array<String>] Generated passwords
+  def self.batch(count, type = :random, **options)
+    Batch.generate(count, type, **options)
   end
 end
