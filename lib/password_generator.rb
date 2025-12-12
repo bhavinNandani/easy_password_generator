@@ -6,6 +6,7 @@ require "securerandom"
 require "byebug"
 
 module PasswordGenerator
+  # class for passowrd generator
   class Generator
     def self.generate(length = 12, upper_case: true, lower_case: true, numbers: true, symbols: false, known_keywords: "", mix: true)
       charset = build_charset(upper_case, lower_case, numbers, symbols)
@@ -19,8 +20,6 @@ module PasswordGenerator
         generate_random_password(length, charset)
       end
     end
-
-    private
 
     def self.build_charset(upper_case, lower_case, numbers, symbols)
       charset = []
@@ -43,12 +42,12 @@ module PasswordGenerator
       password.join
     end
 
-    def self.generate_keyword_only_password(length, known_keywords, charset)
+    def self.generate_keyword_only_password(length, known_keywords, _charset)
       keywords_array = known_keywords.split(",")
       password = []
       remaining_length = length
 
-      while remaining_length > 0
+      while remaining_length.positive?
         keyword = keywords_array.select { |k| k.length <= remaining_length }.sample
 
         if keyword.nil?
