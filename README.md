@@ -10,8 +10,8 @@ PassForge is a feature-rich password generation toolkit that goes beyond simple 
 ## ✨ Features
 
 - 🎲 **Random Passwords** - Fully customizable character sets
-- 📝 **Memorable Passphrases** - XKCD-style word-based passwords *(coming soon)*
-- 🛡️ **Strength Analysis** - Entropy calculation and crack time estimation *(coming soon)*
+- 📝 **Memorable Passphrases** - XKCD-style word-based passwords
+- 🛡️ **Strength Analysis** - Entropy calculation and crack time estimation
 - 🔍 **Breach Checking** - HaveIBeenPwned API integration *(coming soon)*
 - 🗣️ **Pronounceable Passwords** - Easier to type and remember *(coming soon)*
 - 🎨 **Pattern-Based Generation** - Custom password patterns *(coming soon)*
@@ -48,6 +48,17 @@ password = PassForge.random(length: 16)
 # Generate with symbols
 password = PassForge.random(length: 12, symbols: true)
 # => "aB3!dE7@gH9#"
+
+# Generate a passphrase
+passphrase = PassForge.passphrase
+# => "Correct-Horse-Battery-Staple"
+
+# Analyze password strength
+result = PassForge.analyze("MyP@ssw0rd123")
+puts result.strength  # => :fair
+puts result.score     # => 65
+puts result.entropy   # => 85.21
+puts result.suggestions  # => ["Use at least 12 characters"]
 ```
 
 ## 📖 Usage
@@ -98,12 +109,67 @@ PassForge.random(length: 12, known_keywords: "dog,cat,fish", mix: false)
 # => "dogcatfishdo"
 ```
 
+### Passphrase Generation
+
+Generate memorable, XKCD-style passphrases:
+
+```ruby
+# Basic passphrase (4 words)
+PassForge.passphrase
+# => "Correct-Horse-Battery-Staple"
+
+# Custom word count
+PassForge.passphrase(words: 6)
+# => "Correct-Horse-Battery-Staple-Clipper-Amazing"
+
+# Custom separator
+PassForge.passphrase(words: 4, separator: " ")
+# => "Correct Horse Battery Staple"
+
+# With numbers
+PassForge.passphrase(words: 4, numbers: true)
+# => "Correct-Horse-Battery-Staple-42"
+
+# Lowercase
+PassForge.passphrase(words: 4, capitalize: false)
+# => "correct-horse-battery-staple"
+```
+
+### Password Strength Analysis
+
+Analyze password security:
+
+```ruby
+result = PassForge.analyze("MyP@ssw0rd123")
+
+result.strength      # => :fair
+result.score         # => 65 (0-100)
+result.entropy       # => 85.21 bits
+result.crack_time    # => "centuries"
+result.suggestions   # => ["Use at least 12 characters"]
+
+# Get hash representation
+result.to_h
+# => {
+#   score: 65,
+#   entropy: 85.21,
+#   crack_time: "centuries",
+#   strength: :fair,
+#   suggestions: ["Use at least 12 characters"]
+# }
+```
+
+**Strength Levels:**
+- `:very_weak` - Easily cracked
+- `:weak` - Vulnerable
+- `:fair` - Acceptable for low-security
+- `:strong` - Good for most uses
+- `:very_strong` - Excellent security
+
 ## 🔮 Coming Soon
 
 PassForge v1.1+ will include:
 
-- **Passphrase Generation**: `PassForge.passphrase(words: 4)` → `"correct-horse-battery-staple"`
-- **Strength Analysis**: `PassForge.analyze("password")` → strength score, entropy, crack time
 - **Breach Checking**: `PassForge.breached?("password123")` → check against known breaches
 - **Pronounceable Passwords**: `PassForge.pronounceable(length: 12)` → easier to type
 - **Pattern-Based**: `PassForge.pattern("Cvccvc99!")` → custom patterns
