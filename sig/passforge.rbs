@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+module PassForge
+  # RBS type signature file for PassForge
+end
