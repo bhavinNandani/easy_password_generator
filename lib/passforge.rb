@@ -6,6 +6,7 @@ require "passforge/wordlist"
 require "passforge/generator"
 require "passforge/passphrase"
 require "passforge/analyzer"
+require "passforge/breach_checker"
 require "securerandom"
 
 # PassForge - A comprehensive password generation toolkit
@@ -39,5 +40,12 @@ module PassForge
   # @return [Analyzer::Result] Analysis result
   def self.analyze(password)
     Analyzer.analyze(password)
+  end
+
+  # Check if password has been breached
+  # @param password [String] Password to check
+  # @return [Hash] Breach information
+  def self.breached?(password)
+    BreachChecker.check(password)
   end
 end
