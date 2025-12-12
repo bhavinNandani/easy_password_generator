@@ -2,7 +2,9 @@
 
 require "passforge/version"
 require "passforge/charsets"
+require "passforge/wordlist"
 require "passforge/generator"
+require "passforge/passphrase"
 require "securerandom"
 
 # PassForge - A comprehensive password generation toolkit
@@ -22,5 +24,12 @@ module PassForge
   # @return [String] Generated password
   def self.random(length: 12, **options)
     Generator.generate(length, **options)
+  end
+
+  # Generate a passphrase
+  # @param options [Hash] Passphrase options
+  # @return [String] Generated passphrase
+  def self.passphrase(**options)
+    Passphrase.generate(**options)
   end
 end
