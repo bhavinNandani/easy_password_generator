@@ -7,6 +7,8 @@
 
 PassForge is a feature-rich password generation toolkit that goes beyond simple random passwords. Generate memorable passphrases, analyze password strength, check for breaches, and more.
 
+🚀 **Try the Web App:** [PassForge Web Interface](https://github.com/bhavinNandani/passforge-web) (Demo)
+
 ## ✨ Features
 
 - 🎲 **Random Passwords** - Fully customizable character sets
