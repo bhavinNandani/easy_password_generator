@@ -10,6 +10,7 @@ require "passforge/breach_checker"
 require "passforge/pronounceable"
 require "passforge/pattern"
 require "passforge/batch"
+require "passforge/personal"
 require "securerandom"
 
 # PassForge - A comprehensive password generation toolkit
@@ -73,5 +74,13 @@ module PassForge
   # @return [Array<String>] Generated passwords
   def self.batch(count, type = :random, **options)
     Batch.generate(count, type, **options)
+  end
+
+  # Generate a personalized password
+  # @param keywords [Array<String>] Personal keywords
+  # @param options [Hash] Generation options
+  # @return [String] Generated password
+  def self.personal(keywords, **options)
+    Personal.generate(keywords, **options)
   end
 end
