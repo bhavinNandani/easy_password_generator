@@ -1,13 +1,34 @@
 # frozen_string_literal: true
 
-require "password_generator/version"
-require "password_generator/charsets"
 require "securerandom"
-require "byebug"
 
-module PasswordGenerator
-  # class for passowrd generator
+module PassForge
+  # Main password generator class
+  # Handles random password generation with customizable character sets
   class Generator
+    # Generate a random password
+    #
+    # @param length [Integer] Length of the password (default: 12)
+    # @param upper_case [Boolean] Include uppercase letters (default: true)
+    # @param lower_case [Boolean] Include lowercase letters (default: true)
+    # @param numbers [Boolean] Include numbers (default: true)
+    # @param symbols [Boolean] Include symbols (default: false)
+    # @param known_keywords [String] Comma-separated keywords to include (default: "")
+    # @param mix [Boolean] Mix keywords with random characters (default: true)
+    # @return [String] Generated password
+    #
+    # @example Generate a basic password
+    #   PassForge::Generator.generate(16)
+    #   # => "aB3dE7gH9jK2mN5p"
+    #
+    # @example Generate a password with symbols
+    #   PassForge::Generator.generate(12, symbols: true)
+    #   # => "aB3!dE7@gH9#"
+    #
+    # @example Generate a password with keywords
+    #   PassForge::Generator.generate(12, known_keywords: "dog,cat,fish", mix: true)
+    #   # => "dog3aB7gH9jK"
+    #
     def self.generate(length = 12, upper_case: true, lower_case: true, numbers: true, symbols: false, known_keywords: "", mix: true)
       charset = build_charset(upper_case, lower_case, numbers, symbols)
       raise ArgumentError, "At least one character set must be enabled" if charset.empty? && known_keywords.empty?
@@ -21,6 +42,8 @@ module PasswordGenerator
       end
     end
 
+    # Build character set based on options
+    # @private
     def self.build_charset(upper_case, lower_case, numbers, symbols)
       charset = []
       charset += Charsets::UPPER_CASE if upper_case
@@ -30,6 +53,8 @@ module PasswordGenerator
       charset
     end
 
+    # Generate password with keywords mixed with random characters
+    # @private
     def self.generate_mixed_password(length, charset, known_keywords)
       password = Array.new(length) { charset.sample }
 
@@ -42,6 +67,8 @@ module PasswordGenerator
       password.join
     end
 
+    # Generate password using only keywords
+    # @private
     def self.generate_keyword_only_password(length, known_keywords, _charset)
       keywords_array = known_keywords.split(",")
       password = []
@@ -72,6 +99,8 @@ module PasswordGenerator
       password.join
     end
 
+    # Generate completely random password
+    # @private
     def self.generate_random_password(length, charset)
       Array.new(length) { charset.sample }.join
     end
