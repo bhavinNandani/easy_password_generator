@@ -14,7 +14,6 @@ RSpec.describe PasswordGenerator::Generator do
     context "with default settings" do
       it "generates a password of default length 12" do
         password = PasswordGenerator::Generator.generate
-        byebug
         expect(password.length).to eq(12)
       end
 
@@ -61,6 +60,36 @@ RSpec.describe PasswordGenerator::Generator do
           PasswordGenerator::Generator.generate(12, upper_case: false, lower_case: false, numbers: false,
                                                     symbols: false)
         end.to raise_error(ArgumentError, "At least one character set must be enabled")
+      end
+    end
+
+    context "with known keywords" do
+      it "generates a password using only known keywords when mix is false" do
+        password = PasswordGenerator::Generator.generate(12, known_keywords: "dog,cat,fish", mix: false)
+        expect(password.length).to eq(12)
+        known_keywords = %w[dog cat fish]
+        expect(known_keywords.any? { |kw| password.include?(kw) }).to be true
+      end
+
+      it "generates a mixed password with known keywords and random characters when mix is true" do
+        password = PasswordGenerator::Generator.generate(12, known_keywords: "dog,cat,fish", mix: true)
+        expect(password.length).to eq(12)
+        known_keywords = %w[dog cat fish]
+        expect(known_keywords.any? { |kw| password.include?(kw) }).to be true
+        expect(password).to match(/^[a-zA-Z0-9!@#$%^&*\-_+=]+$/)
+      end
+
+      it "handles keywords longer than the specified length" do
+        password = PasswordGenerator::Generator.generate(5, known_keywords: "elephant", mix: false)
+        expect(password.length).to eq(5)
+        expect(password).to eq("eleph")
+      end
+
+      it "generates a password with exact length when using only known keywords" do
+        password = PasswordGenerator::Generator.generate(15, known_keywords: "alpha,beta,gamma", mix: false)
+        expect(password.length).to eq(15)
+        known_keywords = %w[alpha beta gamma]
+        expect(known_keywords.any? { |kw| password.include?(kw) }).to be true
       end
     end
   end
