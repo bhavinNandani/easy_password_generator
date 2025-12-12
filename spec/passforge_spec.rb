@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "password_generator"
+require "passforge"
 
 RSpec.describe PasswordGenerator do
   it "has a version number" do
