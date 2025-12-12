@@ -5,6 +5,7 @@ require "passforge/charsets"
 require "passforge/wordlist"
 require "passforge/generator"
 require "passforge/passphrase"
+require "passforge/analyzer"
 require "securerandom"
 
 # PassForge - A comprehensive password generation toolkit
@@ -31,5 +32,12 @@ module PassForge
   # @return [String] Generated passphrase
   def self.passphrase(**options)
     Passphrase.generate(**options)
+  end
+
+  # Analyze password strength
+  # @param password [String] Password to analyze
+  # @return [Analyzer::Result] Analysis result
+  def self.analyze(password)
+    Analyzer.analyze(password)
   end
 end
