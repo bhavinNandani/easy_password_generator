@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive YARD documentation for all public methods
 - Feature roadmap for upcoming releases
 - Better error messages and validation
+- **Passphrase Generator**: Generate memorable XKCD-style passphrases
+- **Password Strength Analyzer**: Entropy calculation, crack time estimation, strength scoring
+- **Breach Checker**: HaveIBeenPwned API integration with k-anonymity
 
 ### Fixed
 - Improved code organization and structure

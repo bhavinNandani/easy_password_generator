@@ -12,7 +12,7 @@ PassForge is a feature-rich password generation toolkit that goes beyond simple 
 - 🎲 **Random Passwords** - Fully customizable character sets
 - 📝 **Memorable Passphrases** - XKCD-style word-based passwords
 - 🛡️ **Strength Analysis** - Entropy calculation and crack time estimation
-- 🔍 **Breach Checking** - HaveIBeenPwned API integration *(coming soon)*
+- 🔍 **Breach Checking** - HaveIBeenPwned API integration
 - 🗣️ **Pronounceable Passwords** - Easier to type and remember *(coming soon)*
 - 🎨 **Pattern-Based Generation** - Custom password patterns *(coming soon)*
 
@@ -166,13 +166,34 @@ result.to_h
 - `:strong` - Good for most uses
 - `:very_strong` - Excellent security
 
+### Breach Checking
+
+Check if a password has been compromised in known data breaches:
+
+```ruby
+result = PassForge.breached?("password123")
+
+result[:breached]  # => true
+result[:count]     # => 2031380
+
+# Check a secure password
+result = PassForge.breached?("MySecureP@ssw0rd!")
+result[:breached]  # => false
+result[:count]     # => 0
+```
+
+**Privacy & Security:**
+- Uses k-anonymity model (only sends first 5 chars of password hash)
+- Your actual password never leaves your system
+- Powered by HaveIBeenPwned API
+
 ## 🔮 Coming Soon
 
 PassForge v1.1+ will include:
 
-- **Breach Checking**: `PassForge.breached?("password123")` → check against known breaches
 - **Pronounceable Passwords**: `PassForge.pronounceable(length: 12)` → easier to type
 - **Pattern-Based**: `PassForge.pattern("Cvccvc99!")` → custom patterns
+- **Batch Generation**: Generate multiple passwords at once
 
 ## 🛠️ Development
 
