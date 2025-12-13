@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "PassForge is a feature-rich Ruby gem for generating secure passwords. It supports random passwords, memorable passphrases (XKCD-style), pronounceable passwords, pattern-based generation, password strength analysis, entropy calculation, and breach checking via HaveIBeenPwned API."
   spec.homepage = "https://github.com/bhavinNandani/passforge"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/bhavinNandani/passforge"
@@ -28,12 +28,13 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
     end
   end
-  spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.bindir = "bin"
+  spec.executables = ["passforge"]
   spec.require_paths = ["lib"]
 
   # Runtime dependencies
   spec.add_dependency "securerandom", "~> 0.3"
+  spec.add_dependency "thor", "~> 1.2"
 
   # Development dependencies
   spec.add_development_dependency "byebug", "~> 11.0"
