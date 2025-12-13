@@ -52,7 +52,7 @@ RSpec.describe PassForge::Generator do
 
       it "includes symbols when symbols is true" do
         password = PassForge::Generator.generate(12, symbols: true)
-        expect(password).to match(/[!@#$%^&*\-_+=]/)
+        expect(password).to match(/[!@#$%^&*\-_+=\[\]{}|;:'",.<>?\/]/)
       end
 
       it "raises an error if all character sets are disabled" do

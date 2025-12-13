@@ -21,7 +21,10 @@ module PassForge
     #   result[:count]     # => 2_389_234
     #
     def self.check(password)
-      raise ArgumentError, "Password cannot be empty" if password.nil? || password.empty?
+      # Ensure ArgumentError is raised before the rescue block
+      if password.nil? || password.empty?
+        raise ArgumentError, "Password cannot be empty"
+      end
 
       # Generate SHA-1 hash
       hash = Digest::SHA1.hexdigest(password).upcase
@@ -31,7 +34,7 @@ module PassForge
       # Query API with prefix only (k-anonymity)
       response = query_api(prefix)
       
-      return { breached: false, count: 0 } if response.nil?
+      return { breached: nil, count: 0, error: "API unreachable" } if response.nil?
 
       # Check if our suffix appears in the response
       count = parse_response(response, suffix)
@@ -41,7 +44,10 @@ module PassForge
         count: count
       }
     rescue StandardError => e
-      # Return safe default on error
+      # Return safe default or re-raise if it's an ArgumentError
+      raise e if e.is_a?(ArgumentError)
+
+      # Return safe default on other errors
       {
         breached: nil,
         count: 0,
