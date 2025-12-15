@@ -18,6 +18,7 @@ PassForge is a feature-rich password generation toolkit that goes beyond simple 
 - 🗣️ **Pronounceable Passwords** - Easier to type and remember
 - 🎨 **Pattern-Based Generation** - Custom password patterns
 - 📦 **Batch Generation** - Generate multiple passwords at once
+- 💻 **CLI Tool** - Command-line interface for quick generation
 
 ## 📦 Installation
 
@@ -273,7 +274,7 @@ json = PassForge::Batch.to_json(passwords)
 
 PassForge v1.1+ will include:
 
-- **CLI Tool**: Command-line interface for quick password generation
+- **Browser Extension**: Chrome/Firefox extension
 - **Browser Extension**: Chrome/Firefox extension
 - **Password History**: Save generated passwords locally (encrypted)
 
