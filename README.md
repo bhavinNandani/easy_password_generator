@@ -275,8 +275,8 @@ json = PassForge::Batch.to_json(passwords)
 PassForge v1.1+ will include:
 
 - **Browser Extension**: Chrome/Firefox extension
-- **Browser Extension**: Chrome/Firefox extension
 - **Password History**: Save generated passwords locally (encrypted)
+- **Live Strength Meter**: Real-time strength estimation for the Web Interface
 
 ## 🛠️ Development
 
