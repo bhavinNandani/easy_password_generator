@@ -42,7 +42,7 @@ module PassForge
       # Add salt (numbers/symbols) if requested, but keep it memorable
       # We add it at the end or between words if no separator
       if salt
-        password += Charsets::Symbols.sample
+        password += Charsets::SYMBOLS.sample
         password += rand(10..99).to_s
       end
 
